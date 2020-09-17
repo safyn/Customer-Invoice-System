@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+ 
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+		<!-- Console Log Patterns -->
+			<PatternLayout pattern=" %d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+		</Console>
+
+		<!--Directory for the log file and the pattern for the archive where log file is saved 
+			if it exceeds its maximum size.  
+    	--> 
+		<RollingFile name="RollingFile" filename="log/LogFile.log"
+			filepattern="${logPath}/%d{YYYYMMddHHmmss}-log.log">
+			<!-- File Log Pattern  -->
+			<PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+			<!-- Max log file size  -->
+				<SizeBasedTriggeringPolicy size="50 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="5" />
+		</RollingFile>
+ 
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Root>
+	</Loggers>
+
+</Configuration>
